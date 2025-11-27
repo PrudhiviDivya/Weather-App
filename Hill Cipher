@@ -1,0 +1,54 @@
+public class Main{
+
+    // 2x2 Key Matrix
+    static int key[][] = { {3, 3},
+                           {2, 5} };
+
+    public static void main(String[] args) {
+
+        String text = "LI";      // text length must be 2
+
+        String encrypted = encrypt(text);
+        String decrypted = decrypt(encrypted);
+
+        System.out.println("Original : " + text);
+        System.out.println("Encrypted: " + encrypted);
+        System.out.println("Decrypted: " + decrypted);
+    }
+
+    static String encrypt(String text) {
+
+        text = text.toUpperCase();
+        int p1 = text.charAt(0) - 'A';
+        int p2 = text.charAt(1) - 'A';
+
+        int c1 = (key[0][0]*p1 + key[0][1]*p2) % 26;
+        int c2 = (key[1][0]*p1 + key[1][1]*p2) % 26;
+
+        // Ensure positive modulo (important)
+        c1 = (c1 + 26) % 26;
+        c2 = (c2 + 26) % 26;
+
+        return "" + (char)(c1 + 'A') + (char)(c2 + 'A');
+    }
+
+    static String decrypt(String text) {
+
+        text = text.toUpperCase();
+        int c1 = text.charAt(0) - 'A';
+        int c2 = text.charAt(1) - 'A';
+
+        // Inverse of key matrix mod 26 → [[15,17],[20,9]]
+        int inv[][] = { {15, 17},
+                        {20,  9} };
+
+        int p1 = (inv[0][0]*c1 + inv[0][1]*c2) % 26;
+        int p2 = (inv[1][0]*c1 + inv[1][1]*c2) % 26;
+
+        // Fix negative modulo to always be positive
+        p1 = (p1 + 26) % 26;
+        p2 = (p2 + 26) % 26;
+
+        return "" + (char)(p1 + 'A') + (char)(p2 + 'A');
+    }
+}
