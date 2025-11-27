@@ -1,0 +1,49 @@
+public class Main {
+
+    // Substitution key (A-Z mapped to random letters)
+    static String key = "QWERTYUIOPASDFGHJKLZXCVBNM";
+
+    public static void main(String[] args) {
+
+        String text = "HELLO WORLD";
+
+        String encrypted = encrypt(text);
+        String decrypted = decrypt(encrypted);
+
+        System.out.println("Original: " + text);
+        System.out.println("Encrypted: " + encrypted);
+        System.out.println("Decrypted: " + decrypted);
+    }
+
+    static String encrypt(String text) {
+        String result = "";
+
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+
+            if (Character.isLetter(c)) {
+                int pos = c - 'A'; // find position 0–25
+                c = key.charAt(pos); // substitute character
+            }
+
+            result += c;
+        }
+        return result;
+    }
+
+    static String decrypt(String text) {
+        String result = "";
+
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+
+            if (Character.isLetter(c)) {
+                int pos = key.indexOf(c); // find character in key
+                c = (char) ('A' + pos); // convert back to original
+            }
+
+            result += c;
+        }
+        return result;
+    }
+}
