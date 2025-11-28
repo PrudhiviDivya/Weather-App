@@ -47,3 +47,34 @@ public class Main {
         return result;
     }
 }
+Encryption Algorithm
+
+1. Take the plaintext and a substitution key (a mapping of A–Z to new letters).
+
+
+2. For each letter in the plaintext:
+
+Find its position (0–25).
+
+Replace it with the corresponding letter from the key.
+
+
+
+3. Combine all substituted letters to form the ciphertext.
+
+
+
+Decryption Algorithm
+
+1. Take the ciphertext and the same key.
+
+
+2. For each letter in the ciphertext:
+
+Find its position in the key.
+
+Replace it with the original alphabet letter (A–Z).
+
+
+
+3. Combine all letters to get the plaintext.
