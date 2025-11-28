@@ -64,3 +64,21 @@ public class Main {
         System.out.println("Blowfish Encrypted (Base64): " + Base64.getEncoder().encodeToString(blowEnc));
     }
 }
+
+
+//Small Definition:
+
+RC4 is a stream cipher that generates a pseudorandom keystream and encrypts data using XOR. It works byte-by-byte.
+
+Very Small Algorithm:
+
+1. Key Scheduling (KSA): Initialize array S[0…255] and mix it using key.
+
+
+2. PRGA: Generate keystream bytes by swapping values in S.
+
+
+3. Encryption: Ciphertext = Plaintext XOR Keystream.
+
+
+4. Decryption: Same XOR operation recovers plaintext.
