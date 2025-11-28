@@ -36,3 +36,61 @@ public class Main {
         System.out.println("Decrypted Message : " + plain);
     }
 }
+
+
+RSA
+
+1. Short Definition
+
+RSA (Rivest–Shamir–Adleman) is an asymmetric encryption algorithm that uses two keys:
+
+Public key for encryption
+
+Private key for decryption
+
+
+Its security is based on the difficulty of factoring large prime numbers.
+
+
+---
+
+2. Short Algorithm
+
+Key Generation
+
+1. Choose two large prime numbers  and .
+
+
+2. Compute n = p × q.
+
+
+3. Compute ϕ(n) = (p–1)(q–1).
+
+
+4. Choose public exponent e such that gcd(e, ϕ(n)) = 1.
+
+
+5. Compute private exponent d such that:
+
+
+
+(d \cdot e) \mod ϕ(n) = 1
+
+Encryption
+
+6. Convert message M to a number.
+
+
+7. Compute ciphertext:
+
+
+
+C = M^e \mod n
+
+Decryption
+
+8. Compute original message:
+
+
+
+M = C^d \mod n
