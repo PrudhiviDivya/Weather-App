@@ -23,3 +23,61 @@ public class Main {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+// 1. Small Definition
+
+SHA-1 (Secure Hash Algorithm 1) is a cryptographic hash function that takes any input message and produces a 160-bit hash (40-hex characters).
+It is used for data integrity, though it is now considered weak due to collision attacks.
+
+
+---
+
+2. Small Algorithm (Steps)
+
+1. Pad the message so that its length becomes 448 mod 512.
+
+
+2. Append 64-bit length of the original message → total size becomes a multiple of 512 bits.
+
+
+3. Initialize five 32-bit registers:
+
+H0, H1, H2, H3, H4
+
+
+
+4. Divide padded message into 512-bit blocks.
+
+
+5. For each block:
+
+Break into 16 words of 32 bits each.
+
+Expand them to 80 words using bitwise operations.
+
+Perform 80 rounds using:
+
+Logical functions
+
+Left circular shifts
+
+Round constants
+
+Modular addition
+
+
+Update H0–H4.
+
+
+
+6. After all blocks are processed, concatenate H0 + H1 + H2 + H3 + H4 →
+160-bit SHA-1 hash.
