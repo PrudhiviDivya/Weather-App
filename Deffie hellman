@@ -89,3 +89,35 @@
 
 </body>
 </html>
+
+
+
+//Small Definition:
+
+Diffie–Hellman is a key exchange algorithm that allows two parties to securely generate a shared secret key over an insecure public channel without actually sending the key.
+
+
+---
+
+✅ Small Algorithm (Very Simple Steps)
+
+1. Choose a public prime number  and public base .
+
+
+2. Alice chooses a secret value  and computes .
+
+
+3. Bob chooses a secret value  and computes .
+
+
+4. Alice sends A to Bob; Bob sends B to Alice.
+
+
+5. Alice computes shared key: .
+
+
+6. Bob computes shared key: .
+
+
+7. Both get the same shared secret key K.
+
