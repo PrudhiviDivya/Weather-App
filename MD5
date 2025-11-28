@@ -1,0 +1,23 @@
+import java.security.MessageDigest;
+
+public class Main{
+    public static void main(String[] args) {
+        try {
+            String text = "Hello World";
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digest = md.digest(text.getBytes());
+
+            StringBuilder sb = new StringBuilder();
+            for (byte b : digest) {
+                sb.append(String.format("%02x", b));
+            }
+
+            System.out.println("Text : " + text);
+            System.out.println("MD5 Digest : " + sb.toString());
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+}
