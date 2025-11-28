@@ -31,3 +31,40 @@ public class Main {
     }
 }
 
+Encryption Algorithm
+
+1. Read the plaintext and the key (shift value).
+
+
+2. For each letter in the plaintext:
+
+Convert the letter to its alphabet position (0–25).
+
+Add the key and take modulo 26.
+
+Convert back to a letter.
+
+
+
+3. Combine all letters to form the ciphertext.
+
+
+
+Decryption Algorithm
+
+1. Read the ciphertext and the same key.
+
+
+2. For each letter:
+
+Convert the letter to alphabet position (0–25).
+
+Subtract the key and take modulo 26.
+
+Convert back to a letter.
+
+
+
+3. Output the original plaintext.
+
+
