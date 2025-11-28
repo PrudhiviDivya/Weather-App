@@ -52,3 +52,49 @@ public class Main{
         return "" + (char)(p1 + 'A') + (char)(p2 + 'A');
     }
 }
+Hill Cipher is a polyalphabetic substitution cipher that encrypts plaintext by converting letters into numbers and multiplying them with a key matrix. It uses linear algebra and works on blocks of letters, making it more secure than simple substitution ciphers.
+
+
+---
+
+2. Small Algorithm (Steps of Hill Cipher)
+
+Encryption Algorithm
+
+1. Convert plaintext into numbers (A=0, B=1, … Z=25).
+
+
+2. Divide plaintext into equal-sized blocks.
+
+
+3. Choose an n × n key matrix (must be invertible mod 26).
+
+
+4. Multiply each plaintext block with the key matrix.
+
+
+5. Take the result mod 26.
+
+
+6. Convert numbers back to letters → ciphertext.
+
+
+
+
+---
+
+Decryption Algorithm
+
+1. Compute inverse of key matrix (mod 26).
+
+
+2. Convert ciphertext to numbers.
+
+
+3. Multiply each ciphertext block with the inverse matrix.
+
+
+4. Take the result mod 26.
+
+
+5. Convert numbers to letters → plaintext.
