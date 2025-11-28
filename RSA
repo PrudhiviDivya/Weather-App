@@ -1,0 +1,38 @@
+import java.util.*;
+
+public class Main {
+
+    static int modPow(int base, int exp, int mod) {
+        int result = 1;
+        base = base % mod;
+
+        while (exp > 0) {
+            if ((exp & 1) == 1)
+                result = (result * base) % mod;
+
+            exp = exp >> 1;
+            base = (base * base) % mod;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int p = 3;
+        int q = 11;
+
+        int n = p * q;
+        int phi = (p - 1) * (q - 1);
+
+        int e = 7;
+        int d = 43;  
+
+        int msg = 9;
+
+        int cipher = modPow(msg, e, n);
+        int plain  = modPow(cipher, d, n);
+
+        System.out.println("Original Message : " + msg);
+        System.out.println("Encrypted Message : " + cipher);
+        System.out.println("Decrypted Message : " + plain);
+    }
+}
