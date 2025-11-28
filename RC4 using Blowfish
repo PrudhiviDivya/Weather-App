@@ -1,0 +1,66 @@
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.*;
+
+public class Main {
+    
+    static byte[] rc4(byte[] key, byte[] data) {
+        byte[] S = new byte[256];
+        byte[] K = new byte[256];
+
+        for (int i = 0; i < 256; i++) {
+            S[i] = (byte) i;
+            K[i] = key[i % key.length];
+        }
+
+        int j = 0;
+        for (int i = 0; i < 256; i++) {
+            j = (j + S[i] + K[i]) & 0xFF;
+            byte temp = S[i];
+            S[i] = S[j];
+            S[j] = temp;
+        }
+
+        int i = 0; 
+        j = 0;
+        byte[] out = new byte[data.length];
+
+        for (int k = 0; k < data.length; k++) {
+            i = (i + 1) & 0xFF;
+            j = (j + S[i]) & 0xFF;
+
+            byte temp = S[i];
+            S[i] = S[j];
+            S[j] = temp;
+
+            int t = (S[i] + S[j]) & 0xFF;
+            byte keyStream = S[t];
+
+            out[k] = (byte)(data[k] ^ keyStream);
+        }
+        return out;
+    }
+    
+    static byte[] blowfishEncrypt(String text, byte[] keyBytes) throws Exception {
+        SecretKey key = new SecretKeySpec(keyBytes, "Blowfish");
+        Cipher cipher = Cipher.getInstance("Blowfish");
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        return cipher.doFinal(text.getBytes());
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        String text = "Hello World";
+
+        byte[] rc4Key = "myrc4key".getBytes();
+        byte[] rc4Encrypted = rc4(rc4Key, text.getBytes());
+
+        System.out.println("RC4 Encrypted (bytes): " + Arrays.toString(rc4Encrypted));
+
+        byte[] blowfishKey = "MyBlowfishKey".getBytes(); 
+        
+        byte[] blowEnc = blowfishEncrypt(text, blowfishKey);
+
+        System.out.println("Blowfish Encrypted (Base64): " + Base64.getEncoder().encodeToString(blowEnc));
+    }
+}
