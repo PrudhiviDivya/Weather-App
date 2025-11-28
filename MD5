@@ -21,3 +21,49 @@ public class Main{
         }
     }
 }
+
+
+
+
+
+
+1. Small Definition
+
+MD5 (Message Digest Algorithm 5) is a cryptographic hash function that takes any input message and produces a 128-bit (32-hex character) hash value.
+It is mainly used for integrity checking, not for security (because it is vulnerable to collisions).
+
+
+---
+
+2. Small Algorithm (Steps)
+
+1. Pad the message so its length becomes 448 mod 512.
+
+
+2. Append 64-bit length of the original message to make the total size a multiple of 512 bits.
+
+
+3. Initialize 4 buffers: A, B, C, D (each 32-bit).
+
+
+4. Divide message into 512-bit blocks.
+
+
+5. For each block:
+
+Break into 16 words (32-bit each).
+
+Perform 64 operations using:
+
+Non-linear functions (F, G, H, I)
+
+Left shifts
+
+Modular addition
+
+
+Update A, B, C, D.
+
+
+
+6. After processing all blocks, concatenate A, B, C, D to form the 128-bit MD5 hash.
