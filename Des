@@ -47,3 +47,53 @@ int main() {
 
     return 0;
 }
+
+1. Small Definition
+
+DES (Data Encryption Standard) is a symmetric-key block cipher that encrypts 64-bit data blocks using a 56-bit key. It performs 16 rounds of substitution and permutation to provide secure encryption.
+
+2. Small Algorithm
+
+A. DES Encryption Steps
+1. Take 64-bit plaintext.
+2. Apply Initial Permutation (IP).
+3. Split into Left (L0) and Right (R0) halves (32 bits each).
+4. Repeat the following for 16 rounds (i = 1 to 16):
+
+Expand Ri-1 to 48 bits using E-box.
+XOR the result with Round Key Ki.
+Apply S-box substitution (48 bits → 32 bits).
+Apply P-box permutation.
+Compute Li = Ri-1.
+Compute Ri = Li-1 XOR f(Ri-1, Ki).
+5. After round 16, swap L16 and R16.
+6. Apply Inverse Initial Permutation (IP⁻¹).
+7. Output = 64-bit ciphertext.
+
+B. DES Decryption Steps
+
+(Almost identical to encryption)
+1. Take 64-bit ciphertext.
+2. Apply Initial Permutation (IP).
+3. Split into Left (L0) and Right (R0) halves.
+4. Repeat for 16 rounds (i = 1 to 16):
+Expand Ri-1 to 48 bits using E-box.
+XOR with Round Key K(16−i+1) (keys used in reverse order).
+Apply S-box substitution.
+
+Apply P-box permutation.
+
+Compute Li = Ri-1.
+
+Compute Ri = Li-1 XOR f(Ri-1, K(16−i+1)).
+
+
+
+5. After round 16, swap L16 and R16.
+
+
+6. Apply Inverse Initial Permutation (IP⁻¹).
+
+
+7. Output = 64-bit plaintext.
+
