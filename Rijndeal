@@ -26,3 +26,64 @@ public class Main {
         System.out.println("Decrypted : " + Integer.toHexString(dec));
     }
 }
+
+
+
+//Rijndael is a symmetric block cipher that encrypts data using 128-bit blocks and variable key sizes (128/192/256 bits). It is the algorithm selected as the basis for AES (Advanced Encryption Standard).
+
+
+---
+
+2. Very Small Algorithm
+
+Encryption Steps
+
+1. Input 128-bit plaintext.
+
+
+2. AddRoundKey – XOR plaintext with key.
+
+
+3. Perform Nr rounds, where each round has:
+
+SubBytes (byte substitution using S-Box)
+
+ShiftRows (row shifting)
+
+MixColumns (column mixing)
+
+AddRoundKey
+
+
+
+4. Final round skips MixColumns.
+
+
+5. Output is ciphertext.
+
+
+
+
+---
+
+Decryption Steps
+
+1. AddRoundKey with last round key.
+
+
+2. Perform inverse rounds:
+
+InvShiftRows
+
+InvSubBytes
+
+InvMixColumns
+
+AddRoundKey
+
+
+
+3. Last round skips InvMixColumns.
+
+
+4. Output is original plaintext.
