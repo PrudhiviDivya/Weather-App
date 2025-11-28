@@ -1,0 +1,35 @@
+
+#include <stdio.h>
+#include <string.h>
+
+int S[4] = {3, 5, 7, 11};
+
+int F(int x) {
+    return (x ^ S[x % 4]) + S[(x + 1) % 4];
+}
+
+int main() {
+    char plaintext[] = "HI";
+    int L = plaintext[0];
+    int R = plaintext[1];
+    int key = 10;
+
+    R = R ^ (F(L) + key);
+    L = L ^ (F(R) + key);
+
+    int encL = L;
+    int encR = R;
+
+    L = encL;
+    R = encR;
+
+    L = L ^ (F(R) + key);
+
+    R = R ^ (F(L) + key);
+
+    printf("Plaintext : %s\n", plaintext);
+    printf("Encrypted : %d %d\n", encL, encR);
+    printf("Decrypted : %c%c\n", L, R);
+
+    return 0;
+}
