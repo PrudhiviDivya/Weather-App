@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diffie-Hellman Key Exchange</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+        input {
+            padding: 5px;
+            margin: 5px;
+        }
+        button {
+            padding: 8px;
+            background: #4CAF50;
+            color: white;
+        }
+        .box {
+            border: 1px solid #aaa;
+            padding: 15px;
+            width: 350px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Diffie-Hellman Key Exchange Demo</h2>
+
+<div class="box">
+    <label>Prime number (p): </label><br>
+    <input id="p" type="number" value="23"><br>
+
+    <label>Primitive root (g): </label><br>
+    <input id="g" type="number" value="5"><br>
+
+    <label>Alice Private Key (a): </label><br>
+    <input id="a" type="number" value="6"><br>
+
+    <label>Bob Private Key (b): </label><br>
+    <input id="b" type="number" value="15"><br>
+
+    <button onclick="computeDH()">Compute Keys</button>
+</div>
+
+<h3>Results:</h3>
+<p id="alicePub"></p>
+<p id="bobPub"></p>
+<p id="aliceSecret"></p>
+<p id="bobSecret"></p>
+
+<script>
+    // Fast power mod function
+    function modPow(base, exp, mod) {
+        let result = 1;
+        base = base % mod;
+
+        while (exp > 0) {
+            if (exp % 2 === 1) {
+                result = (result * base) % mod;
+            }
+            exp = Math.floor(exp / 2);
+            base = (base * base) % mod;
+        }
+        return result;
+    }
+
+    function computeDH() {
+        let p = parseInt(document.getElementById("p").value);
+        let g = parseInt(document.getElementById("g").value);
+        let a = parseInt(document.getElementById("a").value);
+        let b = parseInt(document.getElementById("b").value);
+
+        // Alice computes A = g^a mod p
+        let A = modPow(g, a, p);
+        // Bob computes B = g^b mod p
+        let B = modPow(g, b, p);
+
+        // Shared keys
+        let secretA = modPow(B, a, p);
+        let secretB = modPow(A, b, p);
+
+        document.getElementById("alicePub").innerHTML = "Alice Public Key (A) = " + A;
+        document.getElementById("bobPub").innerHTML = "Bob Public Key (B) = " + B;
+        document.getElementById("aliceSecret").innerHTML = "Alice Shared Secret = " + secretA;
+        document.getElementById("bobSecret").innerHTML = "Bob Shared Secret = " + secretB;
+    }
+</script>
+
+</body>
+</html>
