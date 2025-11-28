@@ -33,3 +33,34 @@ int main() {
 
     return 0;
 }
+
+// . Small Definition
+
+Blowfish is a fast, symmetric-key block cipher that encrypts 64-bit blocks using variable key sizes from 32 to 448 bits. It uses a Feistel network with 16 rounds, making it both secure and efficient.
+2. Small Algorithm (Encryption Steps)
+1. Take 64-bit plaintext and divide it into Left (L) and Right (R) halves.
+2. For 16 rounds, repeat:
+L = L XOR Pi (round key).
+R = R XOR F(L) (Blowfish F-function).
+Swap L and R.
+3. After round 16, undo the last swap.
+4. R = R XOR P17, L = L XOR P18.
+5. Output ciphertext (L || R).
+
+3. Blowfish F-Function (Inside Each Round)
+1. Divide 32-bit input into 4 bytes.
+2. Use each byte to index 4 S-boxes.
+3. Combine results using:
+Addition
+XOR
+Multiplication
+4. Output a 32-bit result.
+
+
+4. Blowfish Decryption Algorithm
+
+(Same as encryption — Feistel property)
+1. Take ciphertext, split into L and R.
+2. Repeat 16 rounds using Pi keys in reverse order (P18 → P1).
+3. Apply final XOR with P2 and P1.
+4. Output plaintext.
